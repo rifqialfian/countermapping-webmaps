@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>NYC Housing Flood Risk</title> 
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' />
+    <link href='style.css' rel='stylesheet' />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="map">
+  </div>
+  	<div class="map-overlay top">
+  	<div class="map-overlay-inner">
+  	<h2>Public and Affordable Housing Flood Risk</h2>
+  	New York City areas flooded by Hurricane Sandy and NYCHA public housing locations as of June 2022
+  	<br>Source: NYC Open Data<br>
+  	</div>
+  	</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Set the Mapbox access token
+    mapboxgl.accessToken = 'pk.eyJ1IjoicmlmcWlhbGZpYW4iLCJhIjoiY2xuM3R6bXBqMGNycTJtcndkaWZheXphdCJ9.Xq-7tIuYs74pTg160KwWdA';
+
+    const map = new mapboxgl.Map({
+        container: 'map', // container id
+        style: 'mapbox://styles/rifqialfian/cln56zc5706yl01nscv1lasaf',
+        center: [-73.935242, 40.730610],
+        minZoom: 12
+    });
+
+    // Once the map is loaded, you can add your custom layer
+    map.on('load', function() {
+        // Add a new vector source
+        map.addSource('sandy_layer', {
+            'type': 'vector',
+            'url': 'mapbox://rifqialfian.5oce2r32' // Make sure to replace YOURTILESETID with your actual Tileset ID
+        });
+
+        // Add a new layer with your polygons
+        map.addLayer({
+            'id': 'flood_zones',
+            'type': 'fill',
+            'source': 'sandy_layer',
+            'source-layer': 'Sandy_Inundation_Zone-6v248i', // Ensure the 'source-layer' is set to the correct ID
+            'paint': {
+                'fill-color': '#00158f',
+                'fill-opacity': 0.5
+            }
+        });
+    });
+    map.on('load', function() {
+        // Add a new vector source
+        map.addSource('housing_layer', {
+            'type': 'vector',
+            'url': 'mapbox://rifqialfian.3lk0xxlz' // Make sure to replace YOURTILESETID with your actual Tileset ID
+        });
+
+        // Add a new layer with your polygons
+        map.addLayer({
+            'id': 'public_housing',
+            'type': 'fill',
+            'source': 'housing_layer',
+            'source-layer': 'Map_of_NYCHA_Developments-d6okql', // Ensure the 'source-layer' is set to the correct ID
+            'paint': {
+                'fill-color': '#21130d',
+                'fill-opacity': 0.8
+            }
+        });
+    });
+});
+</script>
+
+</body>
+
+</html>
