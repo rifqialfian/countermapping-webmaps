@@ -85,6 +85,17 @@
     });
 
     map.addLayer({
+      'id':'povertyLevel',
+      'type':'fill',
+      'source':'censusLayer',
+      'source-layer':'nyc_blck_grp_2020_wcensus_dro-4db43i',
+      'paint':{
+        'fill-color':'green',
+        'fill-opacity': 0.5
+      }
+    });
+
+    map.addLayer({
       'id':'floodZones',
       'type':'fill',
       'source':'sandyLayer',
