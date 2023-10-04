@@ -66,6 +66,11 @@
       'url': 'mapbox://iamwfx.28ut4nij'
     });
 
+    map.addSource('censusLayer',{
+      'type':'vector',
+      'url': 'mapbox://iamwfx.6nowkujs'
+    });
+
     // add a new layer with your polygons
 
     map.addLayer({
@@ -77,6 +82,22 @@
         'fill-color':'red',
         'fill-opacity': 0.5
       }
+    });
+
+    map.addLayer({
+      'id':'povertyLevel',
+      'type':'fill',
+      'source':'censusLayer',
+      'source-layer':'nyc_blck_grp_2020_wcensus_dro-4db43i',
+      'paint':{
+        'fill-color':'green',
+        'fill-opacity': 0.5
+      }
+    });
+    
+    map.addLayer({
+      'id':'floodZones',
+      ...
     })
 
     map.addLayer({
