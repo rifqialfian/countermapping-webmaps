@@ -16,6 +16,7 @@ body {
   background-color: #fff;
   border-radius: 3px;
   margin: 10px;
+  font-size: 14px;
 }
 
 .map-overlay-inner {
@@ -30,5 +31,10 @@ margin: 0 0 10px;
 }
 .mapboxgl-popup {
 max-width: 400px;
-font: 12px/20px 'Montserrat Neue',sans-serif;
+font: 10px/20px 'Montserrat Neue',sans-serif;
+}
+.check-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
 }
