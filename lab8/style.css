@@ -28,7 +28,9 @@ body {
 line-height: 24px;
 display: block;
 margin: 0 0 10px;
+font-size: 18px;
 }
+
 .mapboxgl-popup {
 max-width: 400px;
 font: 10px/20px 'Montserrat Neue',sans-serif;
