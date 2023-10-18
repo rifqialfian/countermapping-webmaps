@@ -47,25 +47,25 @@
               <input id='affHousing' type='checkbox' name='viz-toggle' checked='checked'>
           </label>
           <label class='check-container'>Co-Op
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#ef476f'></span>
           </label>
           <label class='check-container'>Shelter
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#f78c6b'></span>
           </label>
           <label class='check-container'>HPD subsized
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#ffd166'></span>
           </label>
           <label class='check-container'>Mobile Home
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#06d6a0'></span>
           </label>
           <label class='check-container'>Public Housing
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#118ab2'></span>
           </label>
           <label class='check-container'>Single-Residency Housing
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#073b4c'></span>
           </label>
           <label class='check-container'>Other
-              <span class="legend-key" style='background:#CCC'></span>
+              <span class="legend-key" style='background:#f4ece2'></span>
           </label>
 
       <br>
@@ -119,7 +119,7 @@
 	</div>
   <script>
   // You'll be inserting your JS code to initialize your map here
-  mapboxgl.accessToken = 'YOUR-MAPBOX-TOKEN';
+  mapboxgl.accessToken = 'pk.eyJ1IjoicmlmcWlhbGZpYW4iLCJhIjoiY2xuM3R6bXBqMGNycTJtcndkaWZheXphdCJ9.Xq-7tIuYs74pTg160KwWdA';
   const map = new mapboxgl.Map({
     container: 'map', // container id
     style: 'mapbox://styles/iamwfx/cl9519asg003414pl56w7ov95', // replace this with your style URL
@@ -176,6 +176,31 @@
         'url': 'mapbox://iamwfx.8thgevrt'
       });
 
+      map.addSource('Housing',{
+        'type':'vector',
+        'url': 'mapbox://iamwfx.ab4g098q'
+      });
+
+      map.addLayer({
+        'id':'affHousing',
+        'type':'line',
+        'source':'Housing',
+        'source-layer':'PLUTO_HOUS_TYPE_MASTER_Featu-7b5u7f',
+        'paint':{
+          'line-width':2,
+          'line-opacity': 1,
+          'line-color':['match',
+            ['get','hous_type'],
+            'coop', '#ef476f',
+            'homeless', '#f78c6b',
+            'hpd_sub', '#ffd166',
+            'mob_home', '#06d6a0',
+            'pub_hou', '#118ab2',
+            'sro', '#073b4c',
+            '#f4ece2'
+            ]
+        }
+      }); 
 
       map.addLayer({
         'id':'povertyLevel',
@@ -279,6 +304,7 @@
           'fill-opacity': 0.3
         }
       });
+     
 
   // Explicitly set the visibility of each to be on or off.
   // There are probably easier ways to do this../
