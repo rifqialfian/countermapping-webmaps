@@ -105,18 +105,15 @@
               In 2080 (1 in 500 year)
               <input id='f80_500' type='checkbox' name='viz-toggle' checked='checked'>
           </label>
-
         <!-- <label class='check-container'>
             NYCHA Buildings
             <input id='nychaBuildings' type='checkbox' name='viz-toggle' checked='checked'>
         </label> -->
-
+      <button id="flyToButton">Go to Roosevelt Island</button>
       </div>
-
   	</div>
-
-
 	</div>
+
   <script>
   // You'll be inserting your JS code to initialize your map here
   mapboxgl.accessToken = 'pk.eyJ1IjoicmlmcWlhbGZpYW4iLCJhIjoiY2xuM3R6bXBqMGNycTJtcndkaWZheXphdCJ9.Xq-7tIuYs74pTg160KwWdA';
@@ -126,11 +123,17 @@
     center: [-73.935242, 40.730610], // The convention for coordinates is  typically [long, lat]
     zoom: 13,
     // maxZoom: 22,
-    minZoom: 12
+    minZoom: 12,
+    pitch: 45,
+    bearing: -17.6
   });
 
     map.on('load',function(){
-      // Give your layer's source a nickname you'll remember easily.
+      const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
+      
       map.addSource('sandyLayer',{
         'type':'vector',
         'url': 'mapbox://iamwfx.bpjzmy2b'
@@ -180,27 +183,6 @@
         'type':'vector',
         'url': 'mapbox://iamwfx.ab4g098q'
       });
-
-      map.addLayer({
-        'id':'affHousing',
-        'type':'line',
-        'source':'Housing',
-        'source-layer':'PLUTO_HOUS_TYPE_MASTER_Featu-7b5u7f',
-        'paint':{
-          'line-width':2,
-          'line-opacity': 1,
-          'line-color':['match',
-            ['get','hous_type'],
-            'coop', '#ef476f',
-            'homeless', '#f78c6b',
-            'hpd_sub', '#ffd166',
-            'mob_home', '#06d6a0',
-            'pub_hou', '#118ab2',
-            'sro', '#073b4c',
-            '#f4ece2'
-            ]
-        }
-      }); 
 
       map.addLayer({
         'id':'povertyLevel',
@@ -254,6 +236,7 @@
           'fill-opacity': 0.3
         }
       });
+
       map.addLayer({
         'id':'f20_500',
         'type':'fill',
@@ -264,6 +247,7 @@
           'fill-opacity': 0.3
         }
       });
+
       map.addLayer({
         'id':'f50_100',
         'type':'fill',
@@ -274,6 +258,7 @@
           'fill-opacity': 0.3
         }
       });
+
       map.addLayer({
         'id':'f50_500',
         'type':'fill',
@@ -284,6 +269,7 @@
           'fill-opacity': 0.3
         }
       });
+
       map.addLayer({
         'id':'f80_100',
         'type':'fill',
@@ -294,6 +280,7 @@
           'fill-opacity': 0.3
         }
       });
+
       map.addLayer({
         'id':'f80_500',
         'type':'fill',
@@ -304,7 +291,69 @@
           'fill-opacity': 0.3
         }
       });
-     
+
+      map.addLayer({
+        'id':'affHousing',
+        'type':'line',
+        'source':'Housing',
+        'source-layer':'PLUTO_HOUS_TYPE_MASTER_Featu-7b5u7f',
+        'paint':{
+          'line-width':
+          ['interpolate',
+            ['linear'],
+            ['zoom'], 13, 2, 18, 10],
+          'line-opacity': 1,
+          'line-color':['match',
+            ['get','hous_type'],
+            'coop', '#ef476f',
+            'homeless', '#f78c6b',
+            'hpd_sub', '#ffd166',
+            'mob_home', '#06d6a0',
+            'pub_hou', '#118ab2',
+            'sro', '#073b4c',
+            '#f4ece2'
+            ]
+        }
+      });
+
+    document.getElementById('flyToButton').addEventListener('click', function() {
+      map.flyTo({
+        center: [-73.9510, 40.7605], 
+        zoom: 16,
+        pitch: 50,
+        bearing: 20,
+        essential: true
+      });
+    });
+
+    map.on('mouseenter','affHousing',function(e){
+      const coordinates = e.features[0].geometry.coordinates.slice();
+      function emptyToYesNo(val){
+    if (val == null || val == undefined){
+      return "No"} else {return "Yes"};
+    }
+    const Address = e.features[0].properties.Address;
+    const BBL = e.features[0].properties.BBL;
+    const Council = e.features[0].properties.Council;
+    const P_2050_1 =emptyToYesNo(e.features[0].properties.P_2050_1)
+    const P_2050_5 = emptyToYesNo(e.features[0].properties.P_2050_5);
+    const P_2100_1 = emptyToYesNo(e.features[0].properties.P_2100_1);
+    const P_2100_5 = emptyToYesNo(e.features[0].properties.P_2100_5);
+
+    var description = '<h4> ' +Address+'<br>'+
+                    'BBL: '+BBL+'<br>'+
+                    'City Council District: '+Council+ '</h4>'+
+                    '<p> In 2050 1 in 100yr Floodplain?: '+ P_2050_1 + '<br>' + 'In 2050 1 in 500yr Floodplain?: '+P_2050_5 +'<br>'+
+                    'In 2100 1 in 100yr Floodplain?: '+P_2100_1 +'<br>'+
+                    'In 2100 1 in 500yr Floodplain?: '+P_2100_5 +'</p>'
+
+    popup.setLngLat(coordinates[0][0]).setHTML(description).addTo(map);
+  })
+
+    map.on('mouseleave', 'affHousing', function() {
+      map.getCanvas().style.cursor = '';
+      popup.remove();
+    });
 
   // Explicitly set the visibility of each to be on or off.
   // There are probably easier ways to do this../

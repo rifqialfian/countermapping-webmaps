@@ -3,7 +3,7 @@ body { margin: 0; padding: 0; }
 .map-overlay {
 font-family: 'Montserrat', sans-serif;
 /*font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;*/
-position: fixed;
+position: relative;
 width: 30%;
 border-radius: 3px;
 background-color: #fff;
@@ -16,10 +16,16 @@ font-size: 10px;
 }
 
 .map-overlay-inner {
-padding: 30px;
+/*padding: 30px;
 margin-bottom: 10px;
+box-sizing: border-box;
 /* width: 20%;
 height:100%; */
+padding: 10px; 
+display: flex;
+flex-direction: column;
+justify-content: space-between; 
+height: 100%;
 }
 
 .map-overlay h2 {
@@ -52,5 +58,19 @@ font: 10px/20px 'Montserrat Neue',sans-serif;
   width: 10px;
   height: 10px;
   margin-right: 5px;
+}
+
+#flyToButton {
+    background-color: #0077cc; 
+    color: white; 
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
+    align-self: center; 
+    margin-top: 10px; 
 }
 
