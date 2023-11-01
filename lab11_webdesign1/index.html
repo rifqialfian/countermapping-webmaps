@@ -1,0 +1,76 @@
+<!-- This is to indicate we have an HTML document -->
+<!DOCTYPE html>
+
+<!-- All our code goes within this tag-->
+<html>
+
+<!-- All the metadata and packages/tools we'll use go in here-->
+<head>
+
+<!-- The charset attribute specifies the character encoding for the HTML document.-->
+<meta charset="utf-8" />
+
+<!-- The title of your page, which will appear in the browser tab -->
+<title>San Francisco</title>
+
+<!-- The size of the viewport vs the rendered page -->
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+<!-- We are going to call the Mapbox GL javascript library, which will allow us to use its functionality -->
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+
+<!-- Alongside this, we are going to bring in the Mapbox GL stylesheet -->
+
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css' rel='stylesheet' />
+
+<link href='style.css' rel='stylesheet' />
+
+<!-- This allows us to bring in new fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<!-- The body contains the actual content of a page -->
+<body>
+
+<!-- The "div" tag delineates a "division" or section of the HTML page.-->
+<div id="rifqi"></div>
+
+<div id="toolbar">
+    <div id='title'>
+      <h1>Food Inspections in San Francisco</h1>
+    </div>
+    <div id='restName'>
+      <h4>Restaurant Name</h4>
+      <h5 id="restText">test text</h5>
+    </div>
+
+    <div>
+    	<h4>Inspection Score</h4>
+    </div>
+
+    <label class='check-container'>No Score
+    	<span class="legend-key" style='background:#aaaaaa'></span>
+    </label>
+    <label class='check-container'>45 - 80
+    	<span class="legend-key" style='background:#440154'></span>
+    </label>
+    <label class='check-container'>80 - 85
+    	<span class="legend-key" style='background:#3b528b'></span>
+    </label>
+    <label class='check-container'>85 - 90
+    	<span class="legend-key" style='background:#21908d'></span>
+    </label>
+    <label class='check-container'>90 - 95
+    	<span class="legend-key" style='background:#5dc963'></span>
+    </label>
+    <label class='check-container'>95 - 100
+    	<span class="legend-key" style='background:#fde725'></span>
+    </label>
+
+</div>
+
+<script src='script.js'></script>
+
+</body>
+
+</html>
