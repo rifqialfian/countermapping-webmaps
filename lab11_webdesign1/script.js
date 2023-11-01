@@ -33,18 +33,15 @@ map.on('load', function () {
 		'source-layer':'Restaurant_Scores_-_LIVES_Sta-dy19a5',
 		'paint':{
 			'circle-opacity': 0.8,
-			'circle-color':[
-            'interpolate',
-            ['linear'],
-            ['coalesce',
-            	['to-number', ['get', 'inspection_score']],0],
-            45, '#aaaaaa',
-            80, '#440154',
-            85, '#3b528b',
-            90, '#21908d',
-            95, '#5dc963',
-            100, '#fde725'
-        ],
+			'circle-color':['step',
+					['to-number', ['get', 'inspection_score']],
+					'#aaaaaa',  
+					45, '#440154',  // (45 - 80)
+					80, '#3b528b',  // (80 - 85)
+					85, '#21908d',  // (85 - 90)
+					90, '#5dc963',  // (90 - 95)
+					95, '#fde725'   // (95 - 100)
+					],
         }
 	});
 })
