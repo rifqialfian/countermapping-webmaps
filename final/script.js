@@ -96,12 +96,20 @@ config.chapters.forEach((record, idx) => {
         var image = new Image();
         image.src = record.image;
         chapter.appendChild(image);
-    }
+    }   
 
     if (record.description) {
         var story = document.createElement('p');
         story.innerHTML = record.description;
         chapter.appendChild(story);
+    }
+
+    if (record.image2) {
+        var image2 = new Image();
+        image2.src = record.image2; // URL of the second image
+        image2.style.width = '40%'; 
+        image2.style.height = 'auto';
+        chapter.appendChild(image2);
     }
 
     if (record.video) {

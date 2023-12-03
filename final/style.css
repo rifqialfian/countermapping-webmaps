@@ -87,6 +87,19 @@
             background-color: : white;
         }
 
+        #interlude2 {
+            width: 100vw;
+        }
+
+        #interlude2 p{
+            font-size: 2vh;
+            font-family: 'Roboto Slab', serif;
+            text-align: justify;
+            margin-left: 32vw;
+            margin-right: 32vw;
+            background-color: : white;
+        }
+
         video {
             width: 32%;
             display: block;
