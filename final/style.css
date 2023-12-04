@@ -38,7 +38,7 @@
             height: 170vh;
             position: relative;
             z-index: 5;
-            background-image: url("images/WhatsApp-Image-2017-11-12-at-13.57.16.jpeg");
+            background-image: url("images/sma_komplek.jpeg");
             background-position: top;
             background-repeat: no-repeat;
             background-size: 100vw 100vh;
@@ -97,6 +97,19 @@
             text-align: justify;
             margin-left: 32vw;
             margin-right: 32vw;
+            background-color: : white;
+        }
+
+        #interlude3 {
+            width: 100vw;
+        }
+
+        #interlude3 p{
+            font-size: 2vh;
+            font-family: 'Roboto Slab', serif;
+            text-align: justify;
+            margin-left: 20vw;
+            margin-right: 20vw;
             background-color: : white;
         }
 
@@ -165,6 +178,10 @@
 
         .step img {
             width: 100%;
+        }
+
+        .centered-title {
+            text-align: center;
         }
 
         @media (max-width: 750px) {

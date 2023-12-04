@@ -92,6 +92,13 @@ config.chapters.forEach((record, idx) => {
         chapter.appendChild(title);
     }
 
+    if (record.titlecenter) {
+    var titlecenter = document.createElement('h3');
+    titlecenter.innerText = record.titlecenter;
+    titlecenter.classList.add('centered-title'); // Add this line
+    chapter.appendChild(titlecenter);
+    }
+
     if (record.image) {
         var image = new Image();
         image.src = record.image;
